@@ -43,6 +43,27 @@ if not Player or not OtherPlayer or Player.PlayerData.job.name ~= "police" then 
 ```
 ---
 
+
+### RCORE Prison support
+if you use [RCORE Prison](https://store.rcore.cz/package/5341769), navigate to 'rcore_prison\modules\base\server\sv-commands.lua'
+
+search for
+```lua
+	if state then
+		PrisonService.JailCitizen(playerId, targetPlayerId, jailTime, reason)
+	end
+```
+and replace that whole function with this one 
+```lua
+	local state = CheckRestrictionZone(playerId, Config.Commands.Jail)
+	local playerName = Framework.getCharacterShortName(playerId)
+
+	if state then
+		PrisonService.JailCitizen(playerId, targetPlayerId, jailTime, reason)
+		exports['futte-newspaper']:CreateJailStory(playerName, jailTime)
+	end
+```
+
 ### Pickle Prison support
 if you use [Pickle Prison](https://github.com/PickleModifications/pickle_prisons), navigate to `pickle_prisons\modules\prison\server.lua`
 search for 
