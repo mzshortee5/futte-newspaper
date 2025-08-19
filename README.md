@@ -60,7 +60,7 @@ and replace that whole function with this one
 
 	if state then
 		PrisonService.JailCitizen(playerId, targetPlayerId, jailTime, reason)
-		exports['futte-newspaper']:CreateJailStory(playerName, jailTime)
+		exports['futte-newspaper']:CreateJailStory(targetPlayerId, jailTime)
 	end
 ```
 
